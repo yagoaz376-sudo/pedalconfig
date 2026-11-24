@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PedalConfig</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon-192.png">
+  <meta name="theme-color" content="#ff8030">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="15" rx="2.5"/><rect x="6" y="8" width="12" height="3" rx=".5"/><circle cx="8.5" cy="16" r="1.6"/><circle cx="15.5" cy="16" r="1.6"/></svg>
+      <span>PedalConfig</span>
+    </div>
+    <div class="conn" id="conn">
+      <button id="connChip" class="chip" title="Conexão com o pedal"><i class="dot"></i><span id="connText">Desconectado</span></button>
+      <div id="connPop" class="pop" hidden>
+        <label class="field"><span>Entrada (pedal → PC)</span><select id="portIn"></select></label>
+        <label class="field"><span>Saída (PC → pedal)</span><select id="portOut"></select></label>
+        <button id="btnConnect" class="btn primary block">Conectar</button>
+        <p class="hint" id="connHint">Use o Microsoft Edge ou o Google Chrome e permita o acesso a dispositivos MIDI.</p>
+      </div>
+    </div>
+    <div class="spacer"></div>
+    <div id="meter" class="meter" title="">
+      <span id="meterText">Memória</span>
+      <div class="bar"><i id="meterBar"></i></div>
+    </div>
+    <button id="btnRead" class="btn" title="Trazer para a tela o que está gravado no pedal">Ler do pedal</button>
+    <button id="btnWrite" class="btn primary" title="Gravar no pedal o que está na tela"><span>Gravar no pedal</span><i id="dirtyDot" class="badge" hidden>não gravado</i></button>
+  </header>
+
+  <div class="layout" id="layout">
+    <nav id="nav" aria-label="Navegação"></nav>
+    <main id="main"></main>
+    <aside id="inspector" aria-label="Edição do botão"></aside>
+  </div>
+
+  <section id="monitor" class="monitor closed">
+    <div class="mbar" id="monBar">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg>
+      <b>Monitor MIDI</b>
+      <span class="hint" id="monCount"></span>
+      <span class="spacer"></span>
+      <label class="hint inline" onclick="event.stopPropagation()">Aprender da porta
+        <select id="learnPort"><option value="">(nenhuma)</option></select>
+      </label>
+      <button class="btn small ghost" id="monClear" onclick="event.stopPropagation()">Limpar</button>
+    </div>
+    <div class="log" id="monLog"></div>
+  </section>
+
+  <div id="toast" class="toast" role="status"></div>
+  <dialog id="dlg"></dialog>
+
+  <script src="model.js"></script>
+  <script src="midi.js"></script>
+  <script src="lcd.js"></script>
+  <script src="app.js"></script>
+  <script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function () {});</script>
+</body>
+</html>
